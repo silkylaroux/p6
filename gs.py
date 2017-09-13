@@ -1,4 +1,4 @@
 import stable_matching_helpers as helpers
 
-
-helpers
+temp = dict
+helpers.inverse_dict(temp)
