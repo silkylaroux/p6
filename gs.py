@@ -26,6 +26,9 @@ def break_dict_List(l):
 # goes through list of lists and makes matches
 def match_maker(l):
     matchedList = list()
-    for _ in l:
-        matchedList = helpers.matching_from_lists(_[0], [1])
+    for x in l:
+        matchedList.append(helpers.matching_from_lists(x[0], x[1])
     return matchedList
+
+
+#
