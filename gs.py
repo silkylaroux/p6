@@ -6,31 +6,54 @@ if __name__ == '__main__':
     import defaultdict
 
     with open (sys.arg[1],'r') as f:
-        data = ast.literal_eval(sys.arg[1],'r')
-    helpers.inverse_dict(data)
+        data = ast.literal_eval(f.read())
 
-    freeMen = [dict() for x in range(data)]
-    d = defaultdict(list)
-    
+    for x in data:
+        menDict = data[x][0]
+        womenDict = data[x][1]
+        
+        freeMenList = dict.keys(menDict)
+        freeWomenList = dict.keys(womenDict)
+
+        gale_shapely(freeMenList,women,menDict,womenDict)
+
+
+
     # freeMen should be the list of men free, which each have a list of free women 
-    def gale_shapely():
-        while has_free() and not has_proposals():
+    def gale_shapely(menL,womenL,menD,womenD):
+        while has_free(menL) and not has_proposals(menL):
 
             #if the woman of the first free man is free
-            if isFree(freeMen[0][0]):
-                join(freeMen[0],freeMen[0][0])
+            if isFree(menD.get(menL[0])[0]):
+                join(menL[0],freeMen[0][0])
             else:
-                if prefers(freeMen[0][0]):
+                if prefersCurrent(freeMen[0][0],freeMen[0]):
                     pass
+                else:
+                    endMarriage(freeMen[0][0])
+                    join(freeMen[0][0])
 
-    def join( m, w):
+
+    #puts men and woman back in free
+    def end_Marriage(w):
         pass
-    
-    def has_free():
+
+    # combines man and woman, and removes from free lists
+    def join(m, w):
         pass
 
 
-    def isFree():
+    def prefers_Current(w, m):
+        pass
+
+
+    #freemen list isn't null
+    def has_free(m):
+        if m is None:
+            return False
+        return True
+
+    def isFree(w):
         pass
 
 
@@ -38,28 +61,3 @@ if __name__ == '__main__':
         pass
 
 
-    # checks if list is empty
-    def is_Empty(l):
-        if (len(l) == 0):
-            return False
-        return True
-
-
-    # breaks full list into pairings of dictionaries
-    def break_dict_List(l):
-        listDictHolder = list()
-        for x in l:
-
-            tempList = [helpers.dict_to_pref_list(
-                x[0]), helpers.dict_to_pref_list(x[1])]
-
-            listDictHolder.append(tempList)
-        return listDictHolder
-
-
-    # goes through list of lists and makes matches
-    def match_maker(l):
-        matchedList = list()
-        for x in l:
-            matchedList.append(helpers.matching_from_lists(x[0], x[1]))
-        return matchedList
